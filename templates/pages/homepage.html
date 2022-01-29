@@ -10,7 +10,23 @@
     <div class="page-inner mt-5">
         <div class="page-header mt-5">
         <div class="container-fluid">
-            <h2>Hello {{request.user.email}}</h2>            
+            <div class="card card-stats card-secondary card-round">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="flaticon-analytics"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Recent Poem Score</p>
+                                <h4 class="card-title">{{last_poem_score}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         </div>
     </div>

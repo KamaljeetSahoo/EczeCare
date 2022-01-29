@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .utils import poem_calc_score
+from .utils import poem_calc_score, poem_calc_db
 from django.contrib.auth.models import User
 from .models import PoemScore
 # Create your views here.
@@ -10,11 +10,13 @@ def landing_page(request):
 
 def homepage(request):
     if request.user.is_authenticated:
-        name = request.user.username
-        name += " KAPS"
+        if len(list(request.user.poemscore_set.all())) != 0:
+            last_poem_entry = list(request.user.poemscore_set.all())[-1]
+            last_poem_score = poem_calc_db(last_poem_entry)
+        else:
+            last_poem_score = 'None'
         c = {
-            "abc": name,
-            "items": ['shampoo', 'apple', 'orange', 'hear']
+            "last_poem_score": last_poem_score,
         }
         return render(request, 'pages/homepage.html', context=c)
     else:
