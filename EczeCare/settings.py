@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authentication'
+    'authentication',
+    'eczema_profile'
 ]
 
 MIDDLEWARE = [
@@ -113,7 +114,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-LOGOUT_REDIRECT_URL = "login"
+LOGOUT_REDIRECT_URL = "landing_page"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
