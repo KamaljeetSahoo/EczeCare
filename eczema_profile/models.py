@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 body_parts = ['hands', 'legs', 'back', 'face', 'torso']
 
@@ -13,12 +14,12 @@ class EczeImage(models.Model):
     profile = models.ManyToManyField(EczeProfile, blank=True)
 
 class PoemScore(models.Model):
-    q1 = models.IntegerField()
-    q2 = models.IntegerField()
-    q3 = models.IntegerField()
-    q4 = models.IntegerField()
-    q5 = models.IntegerField()
-    q6 = models.IntegerField()
-    q7 = models.IntegerField()
-    date = models.DateTimeField(auto_now_add=True)
+    q1 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])
+    q2 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])
+    q3 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])
+    q4 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])
+    q5 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])
+    q6 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])
+    q7 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
