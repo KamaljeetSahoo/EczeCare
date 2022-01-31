@@ -66,6 +66,7 @@ def eczeImageUpload(request):
             obj.processed_image.save(image_name, encoded_image)
             obj.save()
             
+            return redirect("home")
 
         else:
             return redirect("ecze_image")
