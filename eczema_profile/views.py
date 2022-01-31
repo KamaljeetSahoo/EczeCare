@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
-from .utils import poem_calc_score, poem_calc_db
+from .utils import poem_calc_score, poem_calc_db, process_image, encode_image
 from django.contrib.auth.models import User
-from .models import PoemScore
+from .models import PoemScore, EczeImage
+from PIL import Image
+import numpy as np
 # Create your views here.
 
 def landing_page(request):
@@ -44,3 +46,28 @@ def analyse_poem(request):
             return redirect("home")
         else:
             return redirect('analyse_page')
+
+def eczeImagePage(request):
+    if request.user.is_authenticated:
+        return render(request, 'pages/eczeImage.html')
+    else:
+        return redirect("login")
+
+def eczeImageUpload(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            image = request.FILES['ecze_image']
+            image_name = str(image)
+            np_image = np.array(Image.open(image))
+            processed_image = process_image(np_image)
+            encoded_image = encode_image(processed_image)
+
+            obj = EczeImage(image = image, user = request.user)
+            obj.processed_image.save(image_name, encoded_image)
+            obj.save()
+            
+
+        else:
+            return redirect("ecze_image")
+    else:
+        return redirect("login")

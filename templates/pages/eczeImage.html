@@ -1,0 +1,37 @@
+{% extends "layouts/base1.html" %}
+
+{% block title %} Sign Up {% endblock title %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="page-inner mt-5">
+        <div class="page-header mt-5">
+            <div class="container">
+                <div class="content">
+                    <div class="page-inner text-center">
+                        <form method="POST" action="/image_upload/" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group form-control">
+                                <input type="file" name="ecze_image" required>
+                            </div>
+                            <div class="">
+                                <button type="submit" class="btn btn-primary mt-3">UPLOAD</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+{% endblock javascripts %}
