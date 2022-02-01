@@ -7,8 +7,13 @@ def insights_page(request):
     if request.user.is_authenticated:
         poemscore = list(request.user.poemscore_set.all())
         p = []
+        sleepscore = []
         for score in poemscore:
+           
+            sleepscore.append(getattr(score,'q2'))
             p.append(poem_calc_db(score))
+        
+
         
         #Image fetch from db
         images, masks = [], []
@@ -18,6 +23,7 @@ def insights_page(request):
             masks.append(e.processed_image.url)
         a = {
             "poem_score":p,
+            "sleep_score":sleepscore,
             "labels":[i+1 for i in range(len(p))],
             "images": images,
             "masks": masks,

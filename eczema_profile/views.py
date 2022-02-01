@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect 
-from .utils import poem_calc_score, poem_calc_db, process_image, encode_image
+from .utils import poem_calc_score, poem_calc_db, process_image, encode_image, last_severe
 from django.contrib.auth.models import User
 from .models import PoemScore, EczeImage
 from .models import Activity, Food, Allergies, ContactAllergens, HealthEvent, Product, Trigger
 from PIL import Image
 import numpy as np
 # Create your views here.
-
+msgs ={-1:"Your progress has been good, We are happy for you!",0:"Take the questionaire to help us track your progress",1:"Aloevera helps cure itchiness and gives some relief",2:"Listen to soothing music for better sleep",3:"You have to remember not to scratch your skin",4:"Remember to take you medicines on time and keep clean",5:"stay hydrated and moisturised!",6:"Apply lotions and shower some love on your skin",7:"Coconut Oil is the best home remedy for dry skin!"}
 def landing_page(request):
     return render(request, 'pages/landing_page.html')
 
@@ -63,10 +63,13 @@ def homepage(request):
     if request.user.is_authenticated:
         if len(list(request.user.poemscore_set.all())) != 0:
             last_poem_entry = list(request.user.poemscore_set.all())[-1]
+            lastsevere = last_severe(list(request.user.poemscore_set.all())[-1])
             last_poem_score = poem_calc_db(last_poem_entry)
         else:
+            lastsevere = 0
             last_poem_score = 'None'
         c = {
+            "lastsevere":  msgs[lastsevere],
             "last_poem_score": last_poem_score,
         }
         return render(request, 'pages/homepage.html', context=c)
@@ -158,3 +161,6 @@ def add_element(request, element):
             return redirect("home")    
     else:
         return redirect("login")
+
+
+

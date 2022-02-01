@@ -12,6 +12,19 @@ def poem_calc_db(p):
     for i in range(1,8):
         s += getattr(p, 'q'+str(i))
     return s
+def last_severe(l):
+    g = 1
+    max = -1
+    for i in range(1,8):
+        sc = getattr(l,'q'+str(i))
+        if sc>=g:
+            g = sc
+            max = i
+    return max
+
+
+
+
 
 def process_image(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

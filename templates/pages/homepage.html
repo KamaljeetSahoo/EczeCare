@@ -10,14 +10,30 @@
     <div class="page-inner mt-5">
         <div class="page-header mt-5">
         <div class="container-fluid">
+            <div class="card card-info card-annoucement card-round">
+                <div class="card-body text-center">
+                    <div class="card-opening">Welcome {{ request.user.username }},</div>
+                    <div class="card-desc">
+                        {{lastsevere}}
+                    </div>
+                    <a href="/analyse/">
+                        <div class="card-detail">
+                            <div class="btn btn-light btn-rounded">Track Now</div>
+                        </div>
+                    </a>
+                    
+                </div>
+            </div>
             <div class="card card-stats card-secondary card-round">
                 <div class="card-body ">
                     <div class="row">
+                        
                         <div class="col-5">
                             <div class="icon-big text-center">
                                 <i class="flaticon-analytics"></i>
                             </div>
                         </div>
+                        
                         <div class="col-7 col-stats">
                             <div class="numbers">
                                 <p class="card-category">Recent Poem Score</p>
