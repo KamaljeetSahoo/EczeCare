@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authentication',
     'eczema_profile',
-    'Insights'
+    'Insights',
+    'doctor'
 ]
 
 MIDDLEWARE = [

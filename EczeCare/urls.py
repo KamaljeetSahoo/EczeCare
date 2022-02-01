@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
     path('', include('eczema_profile.urls')),
-    path('', include('Insights.urls'))
+    path('', include('Insights.urls')),
+    path('', include('doctor.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

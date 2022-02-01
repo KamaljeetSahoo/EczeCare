@@ -17,7 +17,10 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("home")
+                if 'doctor' in user.username.lower():
+                    return redirect("doctor_homepage")
+                else:
+                    return redirect("home")
             else:
                 msg = "Invalid Credentials"
         else:
