@@ -215,12 +215,11 @@
                 }
             }
         });
-        // var abc = {{trigger_x}}
         var myBarChart = new Chart(barChart, {
 			type: 'bar',
 			data: {
                 //labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                labels : ['corn', 'gluten', 'skin cancer'],
+                labels : {{trigger_x|safe}},
 				//labels: {{trigger_x}},
 				datasets : [{
 					label: "Sales",

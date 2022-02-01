@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from eczema_profile.utils import poem_calc_db
 from collections import Counter
+import json
 
 def find_count_trigger_items(triggers):
     count = []
@@ -19,6 +20,7 @@ def find_count_trigger_items(triggers):
         for product in trigger.product.all():
             count.append(str(product))
     count = dict(Counter(count))
+    count = dict(sorted(count.items(), key=lambda item: item[1], reverse=True))
     label_y=[]
     label_x = []
     for c in count:
@@ -49,7 +51,7 @@ def insights_page(request):
             images.append(e.image.url)
             masks.append(e.processed_image.url)
         a = {
-            "trigger_x":triggers_x,
+            "trigger_x":json.dumps(triggers_x),
             "trigger_y":triggers_y,
             "poem_score":p,
             "sleep_score":sleepscore,
