@@ -23,3 +23,13 @@ class PoemScore(models.Model):
     q7 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
+
+class Triggers(models.Model):
+    food = models.CharField(max_length=100)
+    aller = models.CharField(max_length=100)
+    contact = models.CharField(max_length=100)
+    activity = models.CharField(max_length=100)
+    health_event = models.CharField(max_length=100)
+    prod = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)

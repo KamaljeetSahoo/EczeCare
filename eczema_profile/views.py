@@ -7,6 +7,11 @@ from .models import PoemScore
 def landing_page(request):
     return render(request, 'pages/landing_page.html')
 
+def triggers(request):
+    if request.user.is_authenticated:
+        return render(request,'pages/triggers.html')
+    else:
+        return redirect('login')
 
 def homepage(request):
     if request.user.is_authenticated:

@@ -1,0 +1,178 @@
+{% extends "layouts/base1.html" %}
+
+{% block title %} Insights {% endblock title %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+    <div class="page-inner mt-5">
+        <div class="page-header mt-5">
+        <div class="container">
+            <form method="POST" action="/poem_analyse/">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label">Food</label>
+                    <div class="selectgroup selectgroup-pills">
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Corns</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="CSS" class="selectgroup-input">
+                            <span class="selectgroup-button">Eggs</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="PHP" class="selectgroup-input">
+                            <span class="selectgroup-button">Fish</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="JavaScript" class="selectgroup-input">
+                            <span class="selectgroup-button">Fruits</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="Ruby" class="selectgroup-input">
+                            <span class="selectgroup-button">Legumes</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="Ruby" class="selectgroup-input">
+                            <span class="selectgroup-button">Milk</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="C++" class="selectgroup-input">
+                            <span class="selectgroup-button">Tree Nuts</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="C++" class="selectgroup-input">
+                            <span class="selectgroup-button">Oats</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="C++" class="selectgroup-input">
+                            <span class="selectgroup-button">Wheat</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="C++" class="selectgroup-input">
+                            <span class="selectgroup-button">Gluten</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="C++" class="selectgroup-input">
+                            <span class="selectgroup-button">Peanuts</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="C++" class="selectgroup-input">
+                            <span class="selectgroup-button">Soy</span>
+                        </label>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Allergies</label>
+                    <div class="selectgroup selectgroup-pills">
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Dust</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Sun</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Pets</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Sweat</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contact Allergens</label>
+                    <div class="selectgroup selectgroup-pills">
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Gold</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Nickel</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Rubber</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Fabric</span>
+                        </label>
+                       
+                        
+                        
+                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Activities</label>
+                    <div class="selectgroup selectgroup-pills">
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Sports</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Swimming</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">House Work</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Health Events</label>
+                    <div class="selectgroup selectgroup-pills">
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Asthma</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Illness</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Allergy Attack</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Products</label>
+                    <div class="selectgroup selectgroup-pills">
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Detergents</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Soap</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Sunscreen</span>
+                        </label>
+                        <label class="selectgroup-item">
+                            <input type="checkbox" name="value" value="HTML" class="selectgroup-input">
+                            <span class="selectgroup-button">Deo</span>
+                        </label>
+                    </div>
+                </div>
+                
+            
+        </div>
+        </div>
+    </div>
+{% endblock content %}
+<!-- Specific JS goes HERE -->
+
+
+{% block javascripts %}
+{% endblock javascripts %}
