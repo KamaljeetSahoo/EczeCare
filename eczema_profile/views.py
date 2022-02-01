@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .utils import poem_calc_score, poem_calc_db, process_image, encode_image
 from django.contrib.auth.models import User
 from .models import PoemScore, EczeImage
+from .models import Activity, Food, Allergies, ContactAllergens, HealthEvent, Product, Trigger
 from PIL import Image
 import numpy as np
 # Create your views here.
@@ -11,7 +12,15 @@ def landing_page(request):
 
 def triggers(request):
     if request.user.is_authenticated:
-        return render(request,'pages/triggers.html')
+        c = {
+            'foods': list(Food.objects.all()),
+            'activities': list(Activity.objects.all()),
+            'allergies': list(Allergies.objects.all()),
+            'contactAllergens': list(ContactAllergens.objects.all()),
+            'healthEvents': list(HealthEvent.objects.all()),
+            'products': list(Product.objects.all())
+        }
+        return render(request,'pages/triggers.html', context=c)
     else:
         return redirect('login')
 
