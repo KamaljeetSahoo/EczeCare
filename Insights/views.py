@@ -19,7 +19,13 @@ def find_count_trigger_items(triggers):
         for product in trigger.product.all():
             count.append(str(product))
     count = dict(Counter(count))
-    return count
+    label_y=[]
+    label_x = []
+    for c in count:
+        label_x.append(c)
+        label_y.append(count[c])
+    
+    return label_x,label_y
 
 # Create your views here.
 def insights_page(request):
@@ -29,12 +35,13 @@ def insights_page(request):
         sleepscore = []
         for score in poemscore:
            
-            sleepscore.append(getattr(score,'q2'))
+            sleepscore.append(abs(getattr(score,'q2')-4))
             p.append(poem_calc_db(score))
         
         triggers = list(request.user.trigger_set.all())
-        count = find_count_trigger_items(triggers)
-        print(count)
+        
+        triggers_x,triggers_y = find_count_trigger_items(triggers)
+        print(triggers_x,triggers_y)
         #Image fetch from db
         images, masks = [], []
         ecze_set = list(request.user.eczeimage_set.all())
@@ -42,6 +49,8 @@ def insights_page(request):
             images.append(e.image.url)
             masks.append(e.processed_image.url)
         a = {
+            "trigger_x":triggers_x,
+            "trigger_y":triggers_y,
             "poem_score":p,
             "sleep_score":sleepscore,
             "labels":[i+1 for i in range(len(p))],
