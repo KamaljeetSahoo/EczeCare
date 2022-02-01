@@ -25,12 +25,48 @@ class PoemScore(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
 
-class Triggers(models.Model):
-    food = models.CharField(max_length=100)
-    aller = models.CharField(max_length=100)
-    contact = models.CharField(max_length=100)
-    activity = models.CharField(max_length=100)
-    health_event = models.CharField(max_length=100)
-    prod = models.CharField(max_length=100)
+class Food(models.Model):
+    food_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.food_name)
+
+class Allergies(models.Model):
+    allergy_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.allergy_name)
+
+class ContactAllergens(models.Model):
+    c_allergy_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.c_allergy_name)
+
+class Activity(models.Model):
+    activity_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.activity_name)
+
+class HealthEvent(models.Model):
+    health_event_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.health_event_name)
+
+class Product(models.Model):
+    product = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.product)
+
+class Trigger(models.Model):
+    food = models.ManyToManyField(Food)
+    allergy = models.ManyToManyField(Allergies)
+    contact = models.ManyToManyField(ContactAllergens)
+    activity = models.ManyToManyField(Activity)
+    health_event = models.ManyToManyField(HealthEvent)
+    product = models.ManyToManyField(Product)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
