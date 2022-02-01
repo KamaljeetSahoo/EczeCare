@@ -121,3 +121,11 @@ def eczeImageUpload(request):
             return redirect("ecze_image")
     else:
         return redirect("login")
+
+
+def add_element_page(request, element):
+    print(element)
+    if request.user.is_authenticated:
+        return render(request, 'pages/add_element.html')
+    else:
+        return redirect("login")

@@ -1,0 +1,23 @@
+{% extends "layouts/base1.html" %}
+
+{% block title %} Triggers {% endblock title %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+    <div class="page-inner mt-5">
+        <div class="page-header mt-5">
+        <div class="container">
+            <form method="POST" action="/add_element/">
+                {% csrf_token %}
+                <input type="text" name="element">
+            </form>
+        </div>
+        </div>
+    </div>
+{% endblock content %}
+<!-- Specific JS goes HERE -->
+
+
+{% block javascripts %}
+{% endblock javascripts %}
