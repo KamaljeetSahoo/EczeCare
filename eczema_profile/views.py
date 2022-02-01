@@ -156,7 +156,7 @@ def add_element(request, element):
             if(element == "activities"):
                 obj=Activity(activity_name=added_val)
                 obj.save()
-			return redirect("triggers")																							
+            return redirect("triggers")																							
         else:
             return redirect("home")    
     else:
