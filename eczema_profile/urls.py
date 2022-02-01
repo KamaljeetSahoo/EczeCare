@@ -7,7 +7,7 @@ urlpatterns = [
     path('', landing_page, name="landing_page"),
     path('analyse/', analyse_page, name="analyse_page"),
     path('poem_analyse/', analyse_poem),
-    path('triggers/', triggers,name ="triggers")
+    path('triggers/', triggers, name ="triggers"),
     path('ecze_image/', eczeImagePage, name="ecze_image"),
     path('image_upload/', eczeImageUpload)
 ]
