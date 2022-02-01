@@ -1,6 +1,25 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from eczema_profile.utils import poem_calc_db
+from collections import Counter
+
+def find_count_trigger_items(triggers):
+    count = []
+    for trigger in triggers:
+        for food in trigger.food.all():
+            count.append(str(food))
+        for allergy in trigger.allergy.all():
+            count.append(str(allergy))
+        for contact in trigger.contact.all():
+            count.append(str(contact))
+        for activity in trigger.activity.all():
+            count.append(str(activity))
+        for health_event in trigger.health_event.all():
+            count.append(str(health_event))
+        for product in trigger.product.all():
+            count.append(str(product))
+    count = dict(Counter(count))
+    return count
 
 # Create your views here.
 def insights_page(request):
@@ -13,8 +32,9 @@ def insights_page(request):
             sleepscore.append(getattr(score,'q2'))
             p.append(poem_calc_db(score))
         
-
-        
+        triggers = list(request.user.trigger_set.all())
+        count = find_count_trigger_items(triggers)
+        print(count)
         #Image fetch from db
         images, masks = [], []
         ecze_set = list(request.user.eczeimage_set.all())
