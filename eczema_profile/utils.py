@@ -1,3 +1,6 @@
+import cv2
+from django.core.files.base import ContentFile
+
 def poem_calc_score(d):
     score=0
     for i in range(1,8):
@@ -9,3 +12,13 @@ def poem_calc_db(p):
     for i in range(1,8):
         s += getattr(p, 'q'+str(i))
     return s
+
+def process_image(image):
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    ret,th1 = cv2.threshold(image ,127,255, cv2.THRESH_BINARY)
+    return th1
+
+def encode_image(image):
+    ret, buf = cv2.imencode('.jpg', image)
+    content = ContentFile(buf.tobytes())
+    return content
