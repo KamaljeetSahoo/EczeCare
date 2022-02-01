@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import homepage, landing_page, analyse_page, analyse_poem,triggers,eczeImagePage,eczeImageUpload
+from .views import homepage, landing_page, analyse_page, analyse_poem,triggers,eczeImagePage,eczeImageUpload, add_trigger
 
 urlpatterns = [
     path('home/', homepage, name="home"),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('poem_analyse/', analyse_poem),
     path('triggers/', triggers, name ="triggers"),
     path('ecze_image/', eczeImagePage, name="ecze_image"),
-    path('image_upload/', eczeImageUpload)
+    path('image_upload/', eczeImageUpload),
+    path('add_trigger/', add_trigger)
 ]

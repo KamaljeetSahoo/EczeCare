@@ -24,6 +24,41 @@ def triggers(request):
     else:
         return redirect('login')
 
+def add_trigger(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            trigger_list = ['food', 'allergy', 'activities', 'healthEvents', 'products', 'contactAllergens']
+            trigger = Trigger(user=request.user)
+            trigger.save()
+            request.POST = dict(request.POST)
+            for val in trigger_list:
+                if val in request.POST:
+                    if val == 'food':
+                        for food in request.POST[val]:
+                            print(food)
+                            trigger.food.add(Food.objects.get(food_name=food))
+                    if val == 'allergy':
+                        for allergy in request.POST[val]:
+                            trigger.allergy.add(Allergies.objects.get(allergy_name=allergy))
+                    if val == 'activities':
+                        for activity in request.POST[val]:
+                            trigger.activity.add(Activity.objects.get(activity_name=activity))
+                    if val == 'healthEvents':
+                        for h_event in request.POST[val]:
+                            trigger.health_event.add(HealthEvent.objects.get(health_event_name=h_event))
+                    if val == 'products':
+                        for prod in request.POST[val]:
+                            trigger.product.add(Product.objects.get(product=prod))
+                    if val == 'contactAllergens':
+                        for c_allergen in request.POST[val]:
+                            trigger.contact.add(ContactAllergens.objects.get(c_allergy_name=c_allergen))
+            trigger.save()
+            return redirect("home")
+        else:
+            return render("triggers")
+    else:
+        return redirect("login")
+
 def homepage(request):
     if request.user.is_authenticated:
         if len(list(request.user.poemscore_set.all())) != 0:
