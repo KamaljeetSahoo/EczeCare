@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect 
 from .utils import poem_calc_score, poem_calc_db, process_image, encode_image
 from django.contrib.auth.models import User
 from .models import PoemScore, EczeImage
@@ -73,7 +73,7 @@ def homepage(request):
     else:
         return redirect("login")
 
-def analyse_page(request):
+def analyse_page(request): 
     if request.user.is_authenticated:
         return render(request, 'pages/analyse.html')
     else:
@@ -126,6 +126,35 @@ def eczeImageUpload(request):
 def add_element_page(request, element):
     print(element)
     if request.user.is_authenticated:
-        return render(request, 'pages/add_element.html')
+        return render(request, 'pages/add_element.html',context={'element':element})
+    else:
+        return redirect("login")
+
+def add_element(request, element):
+    
+    if request.user.is_authenticated:
+        if request.method=="POST":
+            added_val=request.POST['element']
+            if(element == "food"):
+                obj=Food(food_name=added_val)
+                obj.save()
+            if(element == "contact_allergen"):
+                obj=ContactAllergens(c_allergy_name=added_val)
+                obj.save()
+            if(element == "health_events"):
+                obj=HealthEvent(health_event_name=added_val)
+                obj.save()
+            if(element == "products"):
+                obj=Product(product=added_val)
+                obj.save()
+            if(element == "allergy"):
+                obj=Allergies(allergy_name=added_val)
+                obj.save()
+            if(element == "activities"):
+                obj=Activity(activity_name=added_val)
+                obj.save()
+			return redirect("triggers")																							
+        else:
+            return redirect("home")    
     else:
         return redirect("login")

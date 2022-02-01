@@ -8,9 +8,11 @@
     <div class="page-inner mt-5">
         <div class="page-header mt-5">
         <div class="container">
-            <form method="POST" action="/add_element/">
+            <form method="POST" action="/add_element/{{element}}/">
                 {% csrf_token %}
+                Enter your new field for {{element}}
                 <input type="text" name="element">
+                <button type="submit">add</button>
             </form>
         </div>
         </div>
