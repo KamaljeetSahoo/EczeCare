@@ -11,6 +11,40 @@
         <div class="page-header mt-5">
         <div class="container-fluid">
             Doctor Page
+            <div class="row">
+            {% for key, patient in patient_details.items %}
+                <div class="col-md-4">
+                    <div class="card card-pricing mt-3">
+                        <div class="card-header">
+                            <h4 class="card-title">{{patient.patient.username}}</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="specification-list">
+                                <li>
+                                    <span class="name-specification">Poem Score</span>
+                                    <span class="status-specification">{{patient.poem_score}}</span>
+                                </li>
+                                <li>
+                                    <span class="name-specification">Blood Group</span>
+                                    <span class="status-specification">{{patient.blood_group}}</span>
+                                </li>
+                                <li>
+                                    <span class="name-specification">Age</span>
+                                    <span class="status-specification">{{patient.age}}</span>
+                                </li>
+                                <li>
+                                    <span class="name-specification">Most Common Trigger</span>
+                                    <span class="status-specification">{{patient.most_common_trigger}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary btn-block"><b>Get Started</b></button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
         </div>
         </div>
     </div>
