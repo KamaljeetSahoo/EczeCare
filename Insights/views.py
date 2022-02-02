@@ -58,7 +58,6 @@ def insights_page(request):
             "labels":[i+1 for i in range(len(p))],
             "images": images,
             "masks": masks,
-            "test_image": images[0]
         } 
 
 
