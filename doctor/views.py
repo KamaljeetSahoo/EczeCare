@@ -1,8 +1,10 @@
+import re
 from django.shortcuts import redirect, render
 from eczema_profile.utils import poem_calc_db
 from Insights.views import find_count_trigger_items
 import json
 from django.contrib.auth.models import User
+from .models import RequestAppointment, Appointment
 
 Blood_group = ['A+','A-','B+','B-','O+','O-','AB+','AB-']
 age_group = [25,15,18,20,35,45,16,27]
@@ -89,3 +91,43 @@ def patient_profile(request, patient_username):
             return redirect("home")
     else:
         return redirect('login')
+
+def request_appointment_page(request):
+    if request.user.is_authenticated:
+        scheduled_appointments = request.user.appointment_set.all()
+        requested_appointments = request.user.requestappointment_set.all()
+        req_app_flag = False
+        scheduled_app_flag = False
+        if len(scheduled_appointments) == 0 or list(scheduled_appointments)[-1].appointment_status == False:
+            message = "Doctor yet to accept the appointment"
+        elif len(scheduled_appointments) != 0 and list(scheduled_appointments)[-1].appointment_status == True:
+            message = "Your Appointment has already been Scheduled, Join the meeting below"
+            scheduled_app_flag = True
+        
+        if len(requested_appointments) == 0 or list(requested_appointments)[-1].request_status == True:
+            request_appointment_message = "You Haven't requested for an appointment Yet"
+            req_app_flag = True
+        elif (len(requested_appointments)!=0) and list(requested_appointments)[-1].request_status == False:
+            request_appointment_message = "You have already requested for an appointment"
+
+        c = {
+            "message": message,
+            'request_appointment_message': request_appointment_message,
+            'req_app_flag': req_app_flag,
+            'sd_flag': scheduled_app_flag
+        }
+        return render(request, 'doctor/request_appointment.html', context=c)
+    else:
+        return redirect('login')
+
+def send_request(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            obj = RequestAppointment(patient=request.user)
+            obj.save()
+            return redirect('appointment')
+        else:
+            return redirect('home')
+    else:
+        return redirect('login')
+    
