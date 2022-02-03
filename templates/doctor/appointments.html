@@ -1,0 +1,35 @@
+{% extends "layouts/base1.html" %}
+
+{% block title %} Homepage {% endblock title %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="page-inner mt-5">
+        <div class="page-header mt-5">
+        <div class="container-fluid">
+            <h2 class="text-center text-primary mt-3">Requested Appointments</h2>
+            {% for app in requested_appointments %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>{{app.patient}}</h4>
+                            </div>
+                            <div class="card-body">
+                                <a class="btn btn-success" href="/accept_appointment/{{app.patient.id}}/{{app.id}}/">Accept</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}{% endblock javascripts %}

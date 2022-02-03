@@ -1,4 +1,3 @@
-import re
 from django.shortcuts import redirect, render
 from eczema_profile.utils import poem_calc_db
 from Insights.views import find_count_trigger_items
@@ -128,6 +127,34 @@ def send_request(request):
             return redirect('appointment')
         else:
             return redirect('home')
+    else:
+        return redirect('login')
+
+def appointments_page(request):
+    if request.user.is_authenticated:
+        if 'doctor' in request.user.username.lower():
+            patients = list(request.user.doctorprofile_set.all()[0].patients.all())
+            requested_appointments = []
+            for patient in patients:
+                if len(list(patient.requestappointment_set.all())):
+                    if list(patient.requestappointment_set.all())[-1].request_status == False:
+                        requested_appointments.append(list(patient.requestappointment_set.all())[-1])
+            c = {
+                'requested_appointments' : requested_appointments
+            }
+            return render(request, 'doctor/appointments.html', context=c)
+    else:
+        return redirect('login')
+
+def accept_appointment(request, patient_id, requested_appointment_id):
+    if request.user.is_authenticated:
+        patient = User.objects.get(id=patient_id)
+        req = RequestAppointment.objects.get(id=requested_appointment_id)
+        req.request_status = True
+        req.save()
+        app = Appointment(patient=patient)
+        app.save()
+        return redirect('doctor_appointments')
     else:
         return redirect('login')
     
