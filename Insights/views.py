@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from eczema_profile.utils import poem_calc_db
+from eczema_profile.utils import poem_calc_db,find_cor
 from collections import Counter
 import json
 
@@ -35,17 +35,30 @@ def insights_page(request):
         poemscore = list(request.user.poemscore_set.all())
         p = []
         sleepscore = []
+        temp =[]
+        hum=[]
+        poem_score_sum=0 
+        temp_sum = 0
+        humidity_sum=0
+        roughness_score=[]
         for score in poemscore:
-           
+            temp.append(int(getattr(score,'temp')))
+            hum.append(getattr(score,'hum'))
             sleepscore.append(abs(getattr(score,'q2')-4))
+            roughness_score.append(int(getattr(score,'q5'))+int(getattr(score,'q6'))+int(getattr(score,'q7')))
             p.append(poem_calc_db(score))
+            poem_score_sum += poem_calc_db(score)
+            temp_sum += int(getattr(score,'temp'))
+            humidity_sum += int(getattr(score,'hum'))
+        cor_temp,cor_humidity = find_cor(temp,hum,p,poem_score_sum,temp_sum,humidity_sum)
         
         triggers = list(request.user.trigger_set.all())
         
         triggers_x,triggers_y = find_count_trigger_items(triggers)
-        print(triggers_x,triggers_y)
+        print(cor_temp,cor_humidity)
         #Image fetch from db
         images, masks = [], []
+       
         ecze_set = list(request.user.eczeimage_set.all())
         for e in ecze_set:
             images.append(e.image.url)
@@ -58,6 +71,9 @@ def insights_page(request):
             "labels":[i+1 for i in range(len(p))],
             "images": images,
             "masks": masks,
+            "temp":json.dumps(temp),
+            "hum":hum,
+            "rough":json.dumps(roughness_score)
         } 
 
 

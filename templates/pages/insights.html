@@ -35,17 +35,32 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Track your Triggers</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="barChart"></canvas>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Track your Triggers</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="barChart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Skin Roughness</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="lineChart3"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             
             
@@ -122,7 +137,9 @@
     <script>
         var lineChart = document.getElementById('lineChart').getContext('2d');
         var lineChart2 = document.getElementById('lineChart2').getContext('2d');
+        
         var barChart = document.getElementById('barChart').getContext('2d');
+        var lineChart3 = document.getElementById('lineChart3').getContext('2d');
     
 
         var myLineChart = new Chart(lineChart, {
@@ -178,9 +195,9 @@
                 labels : {{labels}},
                 datasets: [{
                     label: "Sleep Score",
-                    borderColor: "#1d7af3",
+                    borderColor: "#990e89",
                     pointBorderColor: "#FFF",
-                    pointBackgroundColor: "#1d7af3",
+                    pointBackgroundColor: "#990e89",
                     pointBorderWidth: 2,
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 1,
@@ -198,7 +215,7 @@
                     position: 'bottom',
                     labels : {
                         padding: 10,
-                        fontColor: '#1d7af3',
+                        fontColor: '#990e89',
                     }
                 },
                 tooltips: {
@@ -223,8 +240,8 @@
 				//labels: {{trigger_x}},
 				datasets : [{
 					label: "Triggers",
-					backgroundColor: 'rgb(23, 125, 255)',
-					borderColor: 'rgb(23, 125, 255)',
+					backgroundColor: "#0e9984",
+					borderColor: "#0e9984",
 				    data: {{trigger_y}},
                    // data : [4, 4, 2],
                     //data : [4,3,4,5,6,7,3,2,4,5,6,7]
@@ -242,6 +259,53 @@
 				},
 			}
 		});
+        var myLineChart3 = new Chart(lineChart3, {
+            type: 'line',
+            data: {
+                //labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels : {{labels}},
+                datasets: [{
+                    label: "Skin Roughness",
+                    borderColor: "#990e1c",
+                    pointBorderColor: "#FFF",
+                    pointBackgroundColor: "#990e1c",
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 4,
+                    pointHoverBorderWidth: 1,
+                    pointRadius: 4,
+                    backgroundColor: 'transparent',
+                    fill: true,
+                    borderWidth: 2,
+                    data: {{rough}},
+                    //data:[1,2,3,4,5,6,7,8,9,1,2,3],
+                }]
+            },
+            options : {
+                responsive: true, 
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'bottom',
+                    labels : {
+                        padding: 10,
+                        fontColor: '#990e1c',
+                    }
+                },
+                tooltips: {
+                    bodySpacing: 4,
+                    mode:"nearest",
+                    intersect: 0,
+                    position:"nearest",
+                    xPadding:10,
+                    yPadding:10,
+                    caretPadding:10
+                },
+                layout:{
+                    padding:{left:15,right:15,top:15,bottom:15}
+                }
+            }
+        });
+
+
     </script>
 
 {% endblock javascripts %}

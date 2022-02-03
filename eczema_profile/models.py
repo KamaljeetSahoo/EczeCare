@@ -22,6 +22,8 @@ class PoemScore(models.Model):
     q5 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])
     q6 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])
     q7 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])
+    temp= models.DecimalField(max_digits=5,decimal_places=2)
+    hum = models.DecimalField(max_digits=5,decimal_places=2)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
 

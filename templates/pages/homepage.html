@@ -43,6 +43,49 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex justify-content-between">
+								<div>
+									<h5><b>Humidity</b></h5>
+									<p class="text-muted">{{h}}</p>
+								</div>
+								
+							</div>
+							<div class="progress progress-sm">
+								<div class="progress-bar bg-info w-{{humidity_cor}}" role="progressbar" aria-valuenow="{{humidity_cor}}" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<div class="d-flex justify-content-between mt-2">
+								<p class="text-muted mb-0">Dependency</p>
+								<p class="text-muted mb-0">{{humidity_cor}}%</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex justify-content-between">
+								<div>
+									<h5><b>Temperature</b></h5>
+									<p class="text-muted">{{t}}</p>
+								</div>
+								
+							</div>
+							<div class="progress progress-sm">
+								<div class="progress-bar bg-success w-{{temp_cor}}" role="progressbar" aria-valuenow="{{temp_cor}}" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<div class="d-flex justify-content-between mt-2">
+								<p class="text-muted mb-0">Dependency</p>
+								<p class="text-muted mb-0">{{temp_cor}}%</p>
+							</div>
+						</div>
+					</div>
+				</div>
+                </div>
+            
         </div>
         </div>
     </div>
