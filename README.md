@@ -1,6 +1,4 @@
-# EczeCare
-
-# Project-
+# Project- EczeCare
 ### `THEME : PRECISION MEDICINE`
 
 <ol>
