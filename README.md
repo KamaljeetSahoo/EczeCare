@@ -27,8 +27,8 @@ Contents
 
  * [Demo](#)
  * [Tech-Stacks Used](#Tech-Stacks-Used)
- * [Features Added](#Features of Our Project!)
- * [Deep Dive] (#AI Solution Deep dive)
+ * [Features Added](#)
+ * [Deep Dive] (#)
  * [Snapshots](#Snapshots)
 
 
