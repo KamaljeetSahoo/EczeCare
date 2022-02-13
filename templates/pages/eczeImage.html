@@ -17,7 +17,8 @@
                         <form method="POST" action="/image_upload/" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-group form-control">
-                                <input type="file" name="ecze_image" required>
+                                <input type="file" name="ecze_image" id="imgInp" required>
+                                <img id="blah" height="auto" width="100px" />
                             </div>
                             <div class="">
                                 <button type="submit" class="btn btn-primary mt-3">UPLOAD</button>
@@ -33,5 +34,15 @@
 
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
+
+<script>
+    imgInp.onchange = evt => {
+    const [file] = imgInp.files
+    console.log("asila")
+    if (file) {
+        blah.src = URL.createObjectURL(file)
+    }
+    }
+</script>
 
 {% endblock javascripts %}

@@ -57,12 +57,12 @@ def insights_page(request):
         triggers_x,triggers_y = find_count_trigger_items(triggers)
         print(cor_temp,cor_humidity)
         #Image fetch from db
-        images, masks = [], []
+        images, masks= [], []
        
         ecze_set = list(request.user.eczeimage_set.all())
         for e in ecze_set:
             images.append(e.image.url)
-            masks.append(e.processed_image.url)
+            masks.append([e.processed_image.url, e.score])
         a = {
             "trigger_x":json.dumps(triggers_x),
             "trigger_y":triggers_y,
