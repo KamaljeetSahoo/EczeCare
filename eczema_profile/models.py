@@ -13,6 +13,7 @@ class EczeImage(models.Model):
     image = models.ImageField(upload_to = 'EczeImages', null=True)
     processed_image = models.ImageField(upload_to = 'ProcessedEczeImage', null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    score = models.IntegerField(default=0, blank=True, null=True)
 
 class PoemScore(models.Model):
     q1 = models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(0)])

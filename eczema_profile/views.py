@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect 
-from .utils import poem_calc_score, poem_calc_db, process_image, encode_image, last_severe,weather,find_cor
+from .utils import poem_calc_score, poem_calc_db, process_image, encode_image, last_severe,weather,find_cor, overlay_image, ecze_score
 from django.contrib.auth.models import User
 from .models import PoemScore, EczeImage
 from .models import Activity, Food, Allergies, ContactAllergens, HealthEvent, Product, Trigger
@@ -186,12 +186,12 @@ def eczeImageUpload(request):
             image_name = str(image)
             np_image = np.array(Image.open(image))
             processed_image = process_image(np_image)
+            severity_score = ecze_score(processed_image)
+            processed_image = overlay_image(np_image, processed_image)
             encoded_image = encode_image(processed_image)
-
-            obj = EczeImage(image = image, user = request.user)
+            obj = EczeImage(image = image, user = request.user, score=severity_score)
             obj.processed_image.save(image_name, encoded_image)
             obj.save()
-            
             return redirect("home")
 
         else:
