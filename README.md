@@ -81,6 +81,11 @@ Mask R-CNN is a state of the art model for instance segmentation, developed on t
 </li></br>
 </ol>
 
+### Weight file for DL Model
+---
+Drive Link : https://drive.google.com/file/d/1qKZwkmRWwLs5byPjOMegMUN5FIUhs8vB/view?usp=sharing
+</br>
+
 ### Snapshots
 ---
 Some of the snapshots of website.
