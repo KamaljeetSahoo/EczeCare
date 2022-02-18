@@ -28,7 +28,7 @@ num_classes = 2
 
 model = get_instance_segmentation_model(num_classes)
 model.to(device)
-model.load_state_dict(torch.load('wait.pt', map_location=torch.device('cpu')))
+model.load_state_dict(torch.load('weight.pt', map_location=torch.device('cpu')))
 model.eval()
 
 
